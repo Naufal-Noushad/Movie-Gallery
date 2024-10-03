@@ -1,0 +1,100 @@
+class Movies(models.Model):
+
+    title=models.CharField(max_length=200)
+
+    genre=models.CharField(max_length=200,choices=GenreChoices.choices)
+
+    language=models.CharField(max_length=200)
+
+    year=models.CharField(max_length=200)
+
+    run_time=models.PositiveIntegerField()
+
+    director=models.CharField(max_length=200)
+
+
+
+=====ORM query for creating anew object=======
+
+
+    -->Modelname.objects.create(field1=value1,field2=value2,field3=value3)
+
+    -->Movies.objects.create(
+
+                                title="arm",
+                                genre="Action",
+                                language="Malayalam",
+                                year="2024"
+                                run_time=150
+                                director="Jithin Lal"
+                            )
+
+
+=====ORM Query for fetching all records======
+
+
+    -->qs=Modelname.objects.all()
+
+    -->qs=Movies.objects.all()
+
+
+=====ORM Query for fetching a specific record======
+
+    -->qs=Modelname.objects.get(id=1)
+
+    -->qs=Movies.objects.get(id=1)
+
+
+=====ORM Query for filtering records=======
+
+
+    -->qs=Modelname.objects.filter(field1=value1,field2=value2)
+
+    -->qs=Movies.object.filter(genre="comedy")
+
+    -->qs=Movies.object.filter(genre="comedy",language="Malayalam")
+
+
+=====ORM Query for update records======
+
+
+    -->Modelname.objects.filter(id=2).update(field1=value1,field2=value2)
+
+    -->Movies.objects.filter(id=2).update(run_time=180,year=2020)
+
+
+=====ORM Query for delete a record======
+
+
+    -->Modelname.objects.filter(id=2).delete()
+
+    -->Movies.objects.filter(id=2).delete()
+
+
+
+======Field Lookups========
+
+ORM doesnot supports <,>,<=,>= symbols so we  ude field Lookups
+
+Need to use double underscore beforn lookups
+
+greater than ----__gt
+
+less than ------__lt
+
+greater than or equal-----__gte
+
+less than or equal to -----__lte
+
+
+    -->qs=Movies.objects.filter(run_time__gt=150)
+
+    -->qs=Movies.objects.filter(run_time__gte=150,run_time__lte=200)
+
+
+======ORM Query for sorting====
+
+
+    -->qs=Movies.objects.all().order_by("salary")   #asc
+
+    -->qs=Movies.objects.all().order_by("-salary")   #desc

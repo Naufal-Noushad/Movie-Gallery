@@ -1,0 +1,74 @@
+class Employee(models.Model):
+
+    name = models.CharField(max_length=200)
+
+    position = models.CharField(max_length=200)
+
+    ofiice = models.CharField(max_length=200)
+
+    age = models.PositiveIntegerField()
+
+    start_date = models.DateField()
+
+    salary = models.PositiveIntegerField()
+
+
+q1>query for adding a new record?
+
+Employee.objects.create(
+                            id=1,
+                            name="nihas"
+                            position="qa"
+                            office="tokyo"
+                            age=23
+                            start_date=DAte(14-10-2024)
+                            salary=500000
+                        )
+
+
+q2>query for updating an employee record?
+
+    >Employee.objects.filter(id=1).update(salary=600000,age=25)
+
+
+q3>query for filtering employees with age and salary
+
+    qs=Employee.objects.filter(age=40,salary=600000)
+
+q4>query for deleting employee record
+
+    Employee.objects.filter(id=2).delete()
+
+q5>employee with salary>25000
+
+    Employee.objects.filter(salary__gte=25000)
+
+q6>filtering employee with office tokyo
+
+    qs=Employee.object.filter(office="tokyo")
+
+q7>Query for fetching all records
+
+    qs=Employee.objects.all()
+
+q8>employee with range of 25k to 50k
+
+    qs=Employee.objects.filter(salary__gte=25000,salary__lte=50000)
+
+q9>sort employee wrt salary order by asc
+
+    qs=Employee.object.all().order_by("salary")   #asc
+
+    qs=Employee.object.all().order_by("-salary")   #desc
+
+q10>Employee with highest salary
+
+    aggregate Functions : 
+
+    Count() , Max() , Min() , Sum() , Avg()
+
+    max_salary=Employee.objects.all().values("salary").aggregate(sal=Max('salary'))
+
+q11>group employee wrt office
+
+    office_summary=Employee.objects.all().values('office').annotate(cnt=Count("office"))
